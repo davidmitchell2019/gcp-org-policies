@@ -134,6 +134,15 @@ resource "google_folder_organization_policy" "folder_list_policies" {
 ###
 #  Apply Project Policies defined in yaml file
 ####
+
+data "external" "project_list_policies" {
+  program = ["sh", "${path.module}/get_policy.sh"]
+  query = {
+    policy = jsonencode(local.policies)
+    key    = "project_boolean_constraints"
+  }
+}
+
 resource "google_project_organization_policy" "project_boolean_constraints" {
   for_each   = (local.project_boolean_constraints && var.project_id != null) ? toset(local.policies.project_boolean_constraints) : toset([])
   project    = var.project_id
@@ -145,7 +154,9 @@ resource "google_project_organization_policy" "project_boolean_constraints" {
 }
 
 resource "google_project_organization_policy" "project_list_policies" {
-  for_each   = (local.project_list_policies && var.project_id != null) ? local.policies.project_list_policies : {}
+  //for_each   = (local.project_list_policies && var.project_id != null) ? local.policies.project_list_policies : {}
+  //for_each   = (local.project_list_policies && var.project_id != null) ? local.policies.project_list_policies : null
+  for_each   = (local.project_list_policies && var.project_id != null) ? local.policies.project_list_policies : jsondecode(data.external.project_list_policies.result["policy"])
   project    = var.project_id
   constraint = each.key
 
