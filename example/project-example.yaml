@@ -1,5 +1,5 @@
 ---
-folder_boolean_constraints:
+project_boolean_constraints:
   - appengine.disableCodeDownload
   - compute.disableGuestAttributesAccess
   - compute.disableNestedVirtualization
@@ -13,7 +13,7 @@ folder_boolean_constraints:
   - sql.restrictPublicIp
   - storage.uniformBucketLevelAccess
 
-folder_list_policies:
+project_list_policies:
   compute.restrictSharedVpcHostProjects:
     list_policy:
       deny:
@@ -60,4 +60,3 @@ folder_list_policies:
     list_policy:
       deny:
         all: true
-

@@ -13,6 +13,15 @@ IAM role Organization Policy Administrator is required at the Organization level
 
 1. Create terraform.tfvars file and add values for `org_id`, `folder_id` and `project_id`.
 
+## Issues  
+Line 138: main.tf  
+for\_each   = (local.project\_list\_policies && var.project\_id != null) ? local.policies.project\_list\_policies : null
+
+If a value for project\_list\_policies is NOT provided in the policies.yaml then null needs changing to {}
+
+Otherwise the error below is returned:  
+The true and false result expressions must have consistent types. The given expressions are object and object, respectively.
+
 ## Requirements
 
 | Name | Version |

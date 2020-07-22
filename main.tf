@@ -14,6 +14,16 @@
 *
 * 1. Create terraform.tfvars file and add values for `org_id`, `folder_id` and `project_id`.
 *
+*
+* ## Issues
+* Line 138: main.tf
+* for_each   = (local.project_list_policies && var.project_id != null) ? local.policies.project_list_policies : null
+*
+* If a value for project_list_policies is NOT provided in the policies.yaml then null needs changing to {}
+*
+* Otherwise the error below is returned:
+* The true and false result expressions must have consistent types. The given expressions are object and object, respectively.
+*
 */
 
 locals {
@@ -141,7 +151,7 @@ resource "google_project_organization_policy" "project_list_policies" {
 
   list_policy {
     dynamic "allow" {
-      for_each = contains(keys(lookup(each.value.list_policy, "allow", {})), "all") ? { a : each.value.list_policy.allow.all } : null
+      for_each = contains(keys(lookup(each.value.list_policy, "allow", {})), "all") ? { a : each.value.list_policy.allow.all } : {}
       content {
         all = allow.value
       }
