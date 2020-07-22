@@ -1,6 +1,6 @@
-module "example" {
+module "example_folder" {
   source = "../"
 
-  org_id    = "12345"
-  folder_id = "12345"
+  org_id    = var.org_id
+  folder_id = var.folder_id
 }

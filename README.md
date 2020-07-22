@@ -1,20 +1,30 @@
-# gcp-orgpolicies  
-Apply policies at organization, folder or project level.
+# gcp-org-policies
 
-Create a policies.yaml file with the policy definitions.  
-Policy examples can be found in the [example](example) folder
+## Pre-Requisites  
+IAM role Organization Policy Administrator is required at the Organization level.
+
+## Usage
+
+1. Apply policies at organization, folder or project level.
+
+1. Create a policies.yaml file with the policy definitions.
+
+1. Policy examples can be found in the [example](example) folder
+
+1. Create terraform.tfvars file and add values for `org_id`, `folder_id` and `project_id`.
 
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | terraform | ~> 0.12.8 |
+| google | ~> 3.7 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| google | n/a |
+| google | ~> 3.7 |
 
 ## Inputs
 
