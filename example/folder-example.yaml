@@ -52,8 +52,6 @@ folder_list_policies:
       deny:
         values:
           - deploymentmanager.googleapis.com
-          - replicapool.googleapis.com
-          - replicapoolupdater.googleapis.com
           - resourceviews.googleapis.com
           - doubleclicksearch.googleapis.com
   compute.vmExternalIpAccess:
