@@ -1,16 +1,13 @@
 #!/bin/bash
-#function check_deps() {
-#  test -f $(which jq) || error_exit "jq command not detected in path, please install it"
-#}
-#function parse_input() {
-#  eval "$(jq -r 'rt HOST=\(.controller)"')"
-#  if [[ -z "${HOST}" ]]; then export HOST=none; fi
-#}
-#function return_result() {
-#  VALUE=null
-#  jq -n --arg value $VALUE '{value: $value}'
-#}
-#check_deps && \
-echo '{ "policy": "{}"}'
-#echo '{ "policy": null }'
-#return_result
+set -e
+
+if [ "$#" -ne 1 ]; then
+  echo "Usage: get-policy.sh BOOLEAN"
+  exit 2
+fi
+
+if [ "$1" == "true" ]; then
+  echo '{ "policy": null }'
+else
+  echo '{ "policy": "{}"}'
+fi
